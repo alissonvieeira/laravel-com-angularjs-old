@@ -32,7 +32,7 @@ class ClientService
             return $this->repository->create($data);
         } catch (ValidatorException $e){
             return [
-                'error' => true,
+                'error'   => true,
                 'message' => $e->getMessageBag()
             ];
         }
@@ -45,7 +45,19 @@ class ClientService
             return $this->repository->update($data, $id);
         } catch(ValidationException $e){
             return [
-                'error' => true,
+                'error'   => true,
+                'message' => $e->getMessageBag()
+            ];
+        }
+    }
+
+    public function delete($id)
+    {
+        try{
+            return $this->repository->delete($id);
+        }catch (ValidatorException $e){
+            return [
+                'error'   => true,
                 'message' => $e->getMessageBag()
             ];
         }
