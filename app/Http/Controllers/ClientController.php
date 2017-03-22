@@ -30,7 +30,7 @@ class ClientController extends Controller
 
     public function index()
     {
-        return $this->repository->all();
+        return $this->service->all();
     }
 
     public function store(Request $request)

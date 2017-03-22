@@ -26,6 +26,16 @@ class ClientService
         $this->validator = $validator;
     }
 
+    public function all(){
+        try{
+            return $this->repository->all();
+        }catch (ModelNotFoundException $e){
+            return [
+                'message' => 'Ocorreu um erro ao buscar os clientes.',
+            ];
+        }
+    }
+
     public function create(array $data){
         try {
             $this->validator->with($data)->passesOrFail();
@@ -40,7 +50,7 @@ class ClientService
 
     public function find($id){
         try {
-            
+
             return $this->repository->find($id);
 
         }catch (ModelNotFoundException $e){
