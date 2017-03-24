@@ -14,4 +14,8 @@ class Client extends Model
         'address',
         'obs'
     ];
+
+    public function project(){
+        $this->belongsTo('CodeProject\Entities\Project');
+    }
 }

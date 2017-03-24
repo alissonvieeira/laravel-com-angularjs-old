@@ -5,6 +5,7 @@ namespace CodeProject\Services;
 use CodeProject\Repositories\ProjectRepository;
 use CodeProject\Validators\ProjectValidator;
 use Illuminate\Contracts\Validation\ValidationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Prettus\Validator\Exceptions\ValidatorException;
 
 class ProjectService
@@ -22,6 +23,17 @@ class ProjectService
     {
         $this->repository = $repository;
         $this->validator = $validator;
+    }
+
+    public function all()
+    {
+        try{
+            $this->repository->all();
+        }catch (ModelNotFoundException $e){
+            return [
+                'message' => 'Ocorreu um erro ao buscar os projetos'
+            ];
+        }
     }
 
     public function create(array $data){

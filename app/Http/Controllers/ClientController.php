@@ -2,16 +2,11 @@
 
 namespace CodeProject\Http\Controllers;
 
-use CodeProject\Repositories\ClientRepository;
 use CodeProject\Services\ClientService;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
-    /**
-     * @var ClientRepository
-     */
-    private $repository;
     /**
      * @var ClientService
      */
@@ -19,12 +14,10 @@ class ClientController extends Controller
 
     /**
      * ClientController constructor.
-     * @param ClientRepository $repository
      * @param ClientService $service
      */
-    public function __construct(ClientRepository $repository, ClientService $service)
+    public function __construct(ClientService $service)
     {
-        $this->repository = $repository;
         $this->service = $service;
     }
 
