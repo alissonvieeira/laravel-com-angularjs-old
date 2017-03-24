@@ -28,7 +28,9 @@ class ProjectService
     public function all()
     {
         try{
-            $this->repository->all();
+
+            return $this->repository->with(['owner', 'client'])->all();
+
         }catch (ModelNotFoundException $e){
             return [
                 'message' => 'Ocorreu um erro ao buscar os projetos'
@@ -36,10 +38,13 @@ class ProjectService
         }
     }
 
-    public function create(array $data){
+    public function create(array $data)
+    {
         try {
+
             $this->validator->with($data)->passesOrFail();
-            return $this->repository->create($data);
+            return $this->repository->with(['owner', 'client'])->create($data);
+
         } catch (ValidatorException $e){
             return [
                 'error' => true,
@@ -48,14 +53,43 @@ class ProjectService
         }
     }
 
+    public function find($id)
+    {
+        try{
+
+            return $this->repository->with(['owner', 'client'])->find($id);
+
+        }catch (ModelNotFoundException $e){
+            return [
+                'message' => 'Projeto não encontrado',
+            ];
+        }
+    }
+
     public function update(array $data, $id)
     {
         try{
+
             $this->validator->with($data)->passesOrFail();
-            return $this->repository->update($data, $id);
+            return $this->repository->with(['owner', 'client'])->update($data, $id);
+
         } catch(ValidationException $e){
             return [
                 'error' => true,
+                'message' => $e->getMessageBag()
+            ];
+        }
+    }
+
+    public function delete($id)
+    {
+        try{
+
+            return $this->repository->with(['owner', 'client'])->delete($id);
+
+        }catch (ModelNotFoundException $e){
+            return [
+                'error'   => true,
                 'message' => $e->getMessageBag()
             ];
         }

@@ -28,7 +28,9 @@ class ClientService
 
     public function all(){
         try{
+
             return $this->repository->all();
+
         }catch (ModelNotFoundException $e){
             return [
                 'message' => 'Ocorreu um erro ao buscar os clientes.',
@@ -38,8 +40,10 @@ class ClientService
 
     public function create(array $data){
         try {
+
             $this->validator->with($data)->passesOrFail();
             return $this->repository->create($data);
+
         } catch (ValidatorException $e){
             return [
                 'error'   => true,
@@ -63,8 +67,10 @@ class ClientService
     public function update(array $data, $id)
     {
         try{
+
             $this->validator->with($data)->passesOrFail();
             return $this->repository->update($data, $id);
+
         } catch(ValidationException $e){
             return [
                 'error'   => true,
@@ -76,8 +82,10 @@ class ClientService
     public function delete($id)
     {
         try{
+
             return $this->repository->delete($id);
-        }catch (ValidatorException $e){
+
+        }catch (ModelNotFoundException $e){
             return [
                 'error'   => true,
                 'message' => $e->getMessageBag()
