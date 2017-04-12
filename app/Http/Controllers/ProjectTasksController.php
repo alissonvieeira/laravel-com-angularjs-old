@@ -32,26 +32,9 @@ class ProjectTasksController extends Controller
         return $this->service->create($request->all());
     }
 
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function show($id, $taskId)
     {
-        $projectTask = $this->repository->find($id);
-
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'data' => $projectTask,
-            ]);
-        }
-
-        return view('projectTasks.show', compact('projectTask'));
+        return $this->service->find($id, $taskId);
     }
 
 

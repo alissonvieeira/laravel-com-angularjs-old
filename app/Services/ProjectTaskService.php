@@ -53,11 +53,11 @@ class ProjectTaskService
         }
     }
 
-    public function find($id, $noteId)
+    public function find($id, $taskId)
     {
         try{
 
-            return $this->repository->findWhere(['project_id' => $id, 'id' => $noteId]);
+            return $this->repository->findWhere(['project_id' => $id, 'id' => $taskId]);
 
         }catch (ModelNotFoundException $e){
             return [

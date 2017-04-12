@@ -39,6 +39,7 @@ Route::group(['prefix' => 'project'], function(){
 
     Route::get('{id}/task', 'ProjectTasksController@index');
     Route::post('{id}/task', 'ProjectTasksController@store');
+    Route::get('{id}/task/{taskId}', 'ProjectTasksController@show');
 
 });
 
